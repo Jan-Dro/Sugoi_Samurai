@@ -1,0 +1,93 @@
+.pages{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#letters{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+/* App.css */
+.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+}
+
+.card {
+  max-width: 500px;
+  width: 100%;
+  padding: 20px;
+}
+
+.input-group {
+  margin-top: 10px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.signin-button {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.small-text {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+
+.googlebtn {
+  display: flex;
+  justify-content: center;
+}
+
+.cart{
+  color: white;
+}
+
+.coname{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 30vw;
+  font-size: 200px;
+}
+.face{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 1vw;
+  font-size: 80px;
+}
+
+.coname{  
+  animation-name: floating;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  margin-left: 30px;
+  margin-top: 5px;
+}
+
+@keyframes floating {
+  0% { transform: translate(0,  0px); }
+  50%  { transform: translate(0, 15px); }
+  100%   { transform: translate(0, -0px); }    
+}
+
+.cartstyling{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 40vh;
+}

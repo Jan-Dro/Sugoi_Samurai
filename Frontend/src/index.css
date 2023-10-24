@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+ :root{
+    background-color: black;
+}
+/*
+.container{
+    color: white;
+}
+
+.cart-item {
+    background-color: #f8f8f8; 
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+  
+  .cart-item h4 {
+    color: #333;
+  }
+  
+  .cart-item p {
+    color: #555; 
+  }
+  
+  .remove-button {
+    background-color: #dc3545; 
+    color: #fff; 
+  } */
+
+  .product-details-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left:60vh;
+    width: 70vh; 
+    height: -60vw; 
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 999;
+  }
+  
+  .product-details {
+    width: 75%; 
+    padding: 30px;
+    margin: auto;
+    background: black;
+    z-index: 1000;
+  }
+  .card-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .login-container{
+    margin-top: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .additional-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 10px;
+  }
+
+  .gif-element {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center; /* Center-align the text */
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    animation: bounce 4s infinite;
+    margin-top: -20vh
+;
+    margin-bottom: 20vh
+}
+
+.face::before {
+    content: '^_^';
+    display: inline-block;
+    margin-left: 10px;
+    animation: blink .75s infinite alternate;
+}
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+@keyframes blink {
+    0% {
+        content: '^_^';
+    }
+    100% {
+        content: '^_-';
+    }
+}
