@@ -15,6 +15,7 @@ import Cart from './pages/Cart.jsx';
 import Stickers from './pages/Stickers.jsx';
 import Apparel from './pages/Apperal.jsx';
 import ProductPage from './pages/ProductPage.jsx';
+import About from './About.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -32,6 +33,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 <Route path='/stickers' element={<Stickers />} />
                 <Route path='/apperal' element={<Apparel />} />
                 <Route path='/productPage' element={<ProductPage />} />
+                <Route path='/about-us' element={<About />} />
               </Routes>
             </div>
           </Router>

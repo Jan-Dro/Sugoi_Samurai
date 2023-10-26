@@ -9,12 +9,10 @@ function CheckoutForm({ total }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Ensure Stripe has loaded
     if (!stripe || !elements) {
       return;
     }
 
-    // Create a payment method
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: 'card',
       card: elements.getElement(CardElement),
@@ -25,7 +23,6 @@ function CheckoutForm({ total }) {
       return;
     }
 
-    // Handle the payment on your server
     const response = await fetch('/api/charge', {
       method: 'POST',
       headers: {
@@ -33,17 +30,14 @@ function CheckoutForm({ total }) {
       },
       body: JSON.stringify({
         payment_method: paymentMethod.id,
-        amount: total * 100, // Convert total to cents (Stripe uses cents)
-        currency: 'usd', // Change to your currency if needed
+        amount: total * 100, 
+        currency: 'usd', 
       }),
     });
 
     if (response.ok) {
-      // Payment successful
       console.log('Payment succeeded!');
-      // You can reset the cart or redirect to a success page here
     } else {
-      // Payment failed
       setError('Payment failed. Please try again.');
     }
   };

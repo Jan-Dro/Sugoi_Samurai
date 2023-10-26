@@ -19,13 +19,12 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from products.views import ProductDetail, ProductList
-from users.views import GoogleOAuth2View
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('users/', include('users.urls')),
     path('api/products/', ProductList.as_view(), name='get_all_products'),  # New pattern for listing all products
     path('api/products/<int:product_id>/', ProductDetail.as_view(), name='get_product_by_id'),
-    path('oauth/', GoogleOAuth2View.as_view(), name='google-oauth2'),
     path('customers/', include('customers.urls')),
 ]
 if settings.DEBUG:

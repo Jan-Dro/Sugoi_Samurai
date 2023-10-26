@@ -15,20 +15,13 @@ export default function Appbar() {
     setCustomerDropdownIsOpen(false);
   };
 
+  const { authToken } = useAuth();
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (customerDropdownIsOpen && !event.target.closest(".dropdown")) {
-        handleCloseCustomerDropdown();
-      }
-    };
-  
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [customerDropdownIsOpen]);
-
+  const renderCustomerDropdown = () => {
+    if (!authToken) {
+      return null;
+    }
+  }
   const icons = {
     chevron: <ChevronDown fill="currentColor" size={16} />,
     scale: <Scale className="text-warning" fill="currentColor" size={30} />,

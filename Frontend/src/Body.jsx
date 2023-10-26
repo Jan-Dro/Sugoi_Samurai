@@ -1,15 +1,18 @@
-
-
-
-import React, {useState, useEffect} from "react";
-import {Card, CardBody, CardFooter, Image, Modal} from "@nextui-org/react";
+import React, {useState, useEffect, useCallback} from "react";
+import {Card, CardBody, CardFooter, Image, Modal, Pagination} from "@nextui-org/react";
+import { Link } from "react-router-dom";
 import ProductPage from "./pages/ProductPage";
+import NewItemsCard from "./pages/NewItemsLink";
+import AboutUs from "./pages/AboutUs";
+import CheckoutForm from "./pages/Cart";
 
 
 export default function Body() {
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
-
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const [cartItems, setCartItems] = useState([]);
+  const [cartTotal, setCartTotal] = useState(0);
   useEffect(() => {
     const apiUrl = 'http://localhost:8000/api/products';
 
@@ -36,10 +39,25 @@ export default function Body() {
     setSelectedProduct(null);
   };
 
+  const handleAddToCart = (product) => {
+    const updatedCartItems = [...cartItems, product];
+    const newTotal = updatedCartItems.reduce(
+      (total, item) => total + parseFloat(item.price), 
+      0
+    );
+
+    setCartItems(updatedCartItems);
+    setCartTotal(newTotal);
+  };
+  
+  // ...
+  const displayedProducts = products.slice((currentPage - 1) * 12, currentPage * 12)
   return (
     <>
+    <NewItemsCard />
+
     <div className="gap-2 grid grid-cols-2 sm:grid-cols-4">
-      {products.map((product, index) => (
+      {displayedProducts.map((product, index) => (
           <Card shadow="sm" key={index} isPressable onClick={() => openProductPage(product)}>
             <CardBody className="overflow-visible p-0">
               <Image
@@ -58,6 +76,14 @@ export default function Body() {
           </Card>
       ))}
     </div>
+    <Pagination
+      showControls
+      className="pages"
+      total={2}
+      color="secondary"
+      page={currentPage}
+      onChange={setCurrentPage}
+    />
 
     {selectedProduct && (
       <div className="product-details-container">
@@ -72,10 +98,29 @@ export default function Body() {
           />
           <p>{selectedProduct.description}</p>
           <p>Price: {selectedProduct.price}</p>
-          <button>Add to Cart</button>
+          <button
+            type="button"
+            onClick={() => handleAddToCart(selectedProduct)}
+          >
+          Add to Cart
+          
+          </button>
         </Card>
       </div>
     )}
+<div className="cart">
+  <h2>Shopping Cart</h2>
+  <ul>
+    {cartItems.map((item, index) => (
+      <li key={index}>
+        {item.product_name} - ${item.price}
+      </li>
+    ))}
+  </ul>
+    <p>Total: ${cartTotal.toFixed(2)}</p>
+    <Link to="/cart?total={newTotal}">Go to Cart</Link>
+    </div>
     </>
+    
   );
 }

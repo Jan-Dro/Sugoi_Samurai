@@ -7,7 +7,7 @@ export default function Apparel(){
     return(
         <>
         <Appbar />
-        <h3>These are yo clothes</h3>
+        <h3 className="soon">Coming Soon!</h3>
         </>
     )
 }

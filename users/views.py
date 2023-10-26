@@ -13,8 +13,12 @@ from django.shortcuts import redirect
 from django.http import JsonResponse, HttpResponseRedirect
 from django.views import View
 from urllib.parse import urlencode
+import requests
+from django.http import JsonResponse
+import os
+import dotenv
 
-
+dotenv.load_dotenv()
 User = get_user_model()
 
 class SignupView(CreateAPIView):
@@ -31,57 +35,34 @@ class SignupView(CreateAPIView):
 
 
 
-class GoogleOAuth2View(View):
-    def get(self, request):
 
-        code = request.GET.get('code')
-        if code:
-            redirect_url = "http://127.0.0.1:8000/oauth"
-            client_id = os.environ.get('CLIENT_ID')
-            client_secret = os.environ.get('CLIENT_SECRET')
+def get_states_by_country(request, country_code):
+    api_key = os.environ.get('API_KEY')
+    headers = {
+        "X-CSCAPI-KEY": api_key
+    }
+    response = requests.get(f"https://api.countrystatecity.in/v1/countries/{country_code}/states", headers=headers)
+    
+    if response.status_code == 200:
+        data = response.json()
+        return JsonResponse(data, safe=False)
+    else:
+        return JsonResponse({"error": "Failed to fetch states"}, status=500)
+    
 
-            token_url = "https://oauth2.googleapis.com/token/"
-            token_data = {
-                'code': code,
-                'client_id': client_id,
-                'client_secret': client_secret,
-                'redirect_uri': redirect_url,
-                'grant_type': 'authorization_code',
-            }
+def get_countries(request):
+    api_key = os.environ.get('API_KEY')
+    headers = {
+        "X-CSCAPI-KEY": api_key
+    }
+    try:
+        response = requests.get("https://api.countrystatecity.in/v1/countries", headers=headers)
+        response.raise_for_status()
 
-            token_response = requests.post(token_url, data=token_data)
-            token_json = token_response.json()
+        data = response.json()
+        return JsonResponse(data, safe=False)
+    except requests.exceptions.RequestException as err:
 
-            if 'access_token' in token_json:
-                access_token = token_json['access_token']
-
-
-                user_data_url = f"https://www.googleapis.com/oauth2/v3/userinfo?access_token={access_token}"
-                user_data_response = requests.get(user_data_url)
-                user_data = user_data_response.json()
-
-                print('User Data:', user_data)
-
-        return HttpResponseRedirect('http://localhost:5173/')
-
-    def post(self, request):
-        client_id = os.environ.get('CLIENT_ID')
-        redirect_url = 'http://127.0.0.1:8000/oauth/'
-
-
-        auth_url = 'https://accounts.google.com/o/oauth2/auth/'
-        auth_params = {
-            'client_id': client_id,
-            'redirect_uri': redirect_url,
-            'scope': 'https://www.googleapis.com/auth/userinfo.profile openid',
-            'response_type': 'code',
-            'access_type': 'offline',
-            'prompt': 'consent',
-        }
-        auth_url = f'{auth_url}?{urlencode(auth_params)}'
-
-        response = JsonResponse({'url': auth_url})
-
-        response['Access-Control-Allow-Origin'] = 'http://localhost:5173'
-
-        return response
+        return JsonResponse({"error": f"Failed to fetch countries: {str(err)}"}, status=500)
+    except Exception as err:
+        return JsonResponse({"error": f"An error occurred while fetching countries: {str(err)}"}, status=500)

@@ -10,7 +10,7 @@ class OrderSerializer(serializers.ModelSerializer):
 
 
 class OrderItemSerializer(serializers.ModelSerializer):
-    product = ProductSerializer()  # Include the product information
+    product = ProductSerializer() 
 
     class Meta:
         model = OrderItem
