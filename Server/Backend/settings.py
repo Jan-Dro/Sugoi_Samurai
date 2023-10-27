@@ -29,7 +29,7 @@ API_KEY = os.environ.get('API_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG =  True if os.getenv("DEBUG") == "True" else False
 
-ALLOWED_HOSTS = ['172.31.41.198']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -121,7 +121,8 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
     'http://localhost:8000',
     'http://localhost:80',
-    'http://172.31.41.198',  
+    'http://172.31.41.198',
+    'http://18.232.99.152',  
 ]
 CORS_ALLOW_METHODS = [
     "GET",
