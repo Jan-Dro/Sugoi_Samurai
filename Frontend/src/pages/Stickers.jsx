@@ -6,7 +6,8 @@ export default function Stickers(props) {
     const [products, setProducts] = useState([]);
   
     useEffect(() => {
-      const apiUrl = 'http://localhost:8000/api/products';
+      const base_url = import.meta.env.VITE_BASE_URL
+      const apiUrl = `http://${base_url}/api/products`;
   
       fetch(apiUrl)
         .then((response) => {
@@ -36,7 +37,7 @@ export default function Stickers(props) {
                   width="100%"
                   alt={product.product_name}
                   className="w-full h-[140px] object-contain"
-                  src={`http://localhost:8000${product.image}`}
+                  src={`http://${base_url}${product.image}`}
                 />
               </CardBody>
               <CardFooter className="text-small justify-between">

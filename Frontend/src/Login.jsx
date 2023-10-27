@@ -23,10 +23,11 @@ export default function LoginPage() {
   };
 
   const handleSubmit = async (e) => {
+    const base_url = import.meta.env.VITE_BASE_URL
     e.preventDefault();
   
     try {
-      const response = await fetch('http://127.0.0.1:8000/customers/get-token/', {
+      const response = await fetch(`http://${base_url}/customers/get-token/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

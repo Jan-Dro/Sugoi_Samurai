@@ -6,6 +6,7 @@ async function basicFetch(url, payload) {
 
   
   export async function signup(context) {
+    const base_url = import.meta.env.VITE_BASE_URL
     console.log(context)
     const payload = {
       method: "POST",
@@ -14,11 +15,12 @@ async function basicFetch(url, payload) {
       },
       body: JSON.stringify(context)
     }
-    const body = await basicFetch("http://127.0.0.1:8000/users/signup/",payload)
+    const body = await basicFetch(`http://${base_url}/users/signup/`,payload)
     return body
   }
   
   export async function login(context) {
+    const base_url = import.meta.env.VITE_BASE_URL
     console.log(context)
     const payload = {
       method: "POST",
@@ -27,7 +29,7 @@ async function basicFetch(url, payload) {
       },
       body: JSON.stringify(context)
     }
-    const body = await basicFetch("http://127.0.0.1:8000/users/get-token/", payload)
+    const body = await basicFetch(`http://${base_url}/users/get-token/`, payload)
     return body.token
   }
 

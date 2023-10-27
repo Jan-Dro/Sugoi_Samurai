@@ -1,0 +1,27 @@
+# version: '3'
+
+# services:
+#   api:
+#     build: .
+#     depends_on:
+#       - sugoi_db_1
+#   nginx:
+#     build:
+#       context: .
+#       dockerfile: ./webserver/Dockerfile
+#     restart: always
+#     ports:
+#       - "80:80"
+#     depends_on:
+#       - api
+#   db:
+#     image: postgres:15
+#     environment:
+#       - POSTGRES_USER=postgres
+#       - POSTGRES_PASSWORD=postgres
+#       - POSTGRES_DB=Backend
+#     volumes:
+#       - postgres_data:/var/lib/postgresql/data
+
+# volumes:
+#   postgres_data:

@@ -1,11 +1,12 @@
 import React from "react";
 
 const ProductPage = ({ product }) => {
+  const base_url = import.meta.env.VITE_BASE_URL
   return (
     <div>
       <h2>{product.product_name}</h2>
       <img
-        src={`http://localhost:8000${product.image}`}
+        src={`http://${base_url}${product.image}`}
         alt={product.product_name}
         width="100%"
         height="auto"

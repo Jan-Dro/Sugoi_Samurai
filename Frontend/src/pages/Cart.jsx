@@ -21,8 +21,9 @@ function CheckoutForm({cartItems}) {
   const totalPrice = location.searchParams && location.searchParams.get("newTotal");
 
  useEffect(() => {
+  const base_url = import.meta.env.VITE_BASE_URL
   const fetchCountries = async ()=> {
-    const response = await fetch('http://127.0.0.1:8000/users/api/get_countries/', { 
+    const response = await fetch(`http://${base_url}/users/api/get_countries/`, { 
     });
     const data = await response.json();
       setCountries(data);
@@ -31,8 +32,9 @@ function CheckoutForm({cartItems}) {
     }, []);
 
     async function fetchStatesByCountry(country) {
+      const base_url = import.meta.env.VITE_BASE_URL
       if (country) {
-        const response = await fetch(`http://127.0.0.1:8000/users/api/get_states/${country}/`, {
+        const response = await fetch(`http://${base_url}/users/api/get_states/${country}/`, {
         });
         const data = await response.json();
           setStates(data);

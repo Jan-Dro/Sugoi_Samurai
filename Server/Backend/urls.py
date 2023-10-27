@@ -23,7 +23,7 @@ from products.views import ProductDetail, ProductList
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('users/', include('users.urls')),
-    path('api/products/', ProductList.as_view(), name='get_all_products'),  # New pattern for listing all products
+    path('api/products/', ProductList.as_view(), name='get_all_products'),
     path('api/products/<int:product_id>/', ProductDetail.as_view(), name='get_product_by_id'),
     path('customers/', include('customers.urls')),
 ]

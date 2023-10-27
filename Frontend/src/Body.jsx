@@ -14,7 +14,8 @@ export default function Body() {
   const [cartItems, setCartItems] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
   useEffect(() => {
-    const apiUrl = 'http://localhost:8000/api/products';
+    const base_url = import.meta.env.VITE_BASE_URL
+    const apiUrl = `http://${base_url}/api/products`;
 
     fetch(apiUrl)
       .then((response) => {
@@ -66,7 +67,7 @@ export default function Body() {
                 width="100%"
                 alt={product.product_name}
                 className="w-full h-[140px] object-contain"
-                src={`http://localhost:8000${product.image}`}
+                src={`http://${base_url}${product.image}`}
               />
             </CardBody>
             <CardFooter className="text-small justify-between">
@@ -91,7 +92,7 @@ export default function Body() {
           <button onClick={closeProductDetails}>Close</button>
           <h2>{selectedProduct.product_name}</h2>
           <img
-            src={`http://localhost:8000${selectedProduct.image}`}
+            src={`http://${base_url}${selectedProduct.image}`}
             alt={selectedProduct.product_name}
             width="100%"
             height="auto"
