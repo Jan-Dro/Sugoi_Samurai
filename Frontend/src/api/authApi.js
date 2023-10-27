@@ -6,10 +6,10 @@ async function basicFetch(url, payload) {
 
 
 export async function signup(context) {
-  const base_url = `http://${import.meta.env.VITE_BASE_URL}`
-  const endpoint = '/users/signup/'
-  console.log(base_url)
-  const url = new URL(endpoint, base_url)
+  const base_url = `http://${import.meta.env.VITE_BASE_URL}/users/signup/`
+  // const endpoint = '/users/signup/'
+  // console.log(base_url)
+  // const url = new URL(endpoint, base_url)
   console.log(context)
   const payload = {
     method: "POST",
@@ -18,7 +18,7 @@ export async function signup(context) {
     },
     body: JSON.stringify(context)
   }
-  const body = await basicFetch(url, payload)
+  const body = await basicFetch(base_url, payload)
   return body
 }
 
