@@ -6,7 +6,7 @@
 version: "3"
 services:
   api:
-    image: $DOCKERHUB_UNAME/backend-prod:$NEW_VERSION 
+    image: $DOCKERHUB_UNAME/api-prod:$NEW_VERSION 
     environment:
       - DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY
       - DEBUG=$DEBUG
