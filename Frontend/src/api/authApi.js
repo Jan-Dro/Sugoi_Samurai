@@ -4,33 +4,39 @@ async function basicFetch(url, payload) {
   return body
 }
 
-  
-  export async function signup(context) {
-    const base_url = import.meta.env.VITE_BASE_URL
-    console.log(context)
-    const payload = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(context)
-    }
-    const body = await basicFetch(`http://${base_url}/users/signup/`,payload)
-    return body
+
+export async function signup(context) {
+  const base_url = `http://${import.meta.env.VITE_BASE_URL}`
+  const endpoint = '/users/signup/'
+  console.log(base_url)
+  const url = new URL(endpoint, base_url)
+  console.log(context)
+  const payload = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(context)
   }
-  
-  export async function login(context) {
-    const base_url = import.meta.env.VITE_BASE_URL
-    console.log(context)
-    const payload = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(context)
-    }
-    const body = await basicFetch(`http://${base_url}/users/get-token/`, payload)
-    return body.token
+  const body = await basicFetch(url, payload)
+  return body
+}
+
+export async function login(context) {
+  const base_url = `http://${import.meta.env.VITE_BASE_URL}`
+  const endpoint = '/users/get-token/'
+  const url = new URL(endpoint, base_url)
+
+  console.log(context)
+  const payload = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(context)
   }
+  const body = await basicFetch(url, payload)
+  return body.token
+}
 
   
