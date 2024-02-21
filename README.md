@@ -2,6 +2,9 @@
 
 Welcome to Sugoi Samurai where you can get all of your Anime merch :) 
 
+![SugoiSamurai](https://github.com/Jan-Dro/Sugoi_Samurai/assets/126230256/28a53cc2-1678-4c33-8751-1308b58a569a)
+
+
 ## Features
 
 Sugoi Samurai has an amazing UI that makes shopping experience seamless and easy for customers and managing for administrators:
